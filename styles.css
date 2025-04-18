@@ -1,0 +1,624 @@
+/* 基本設定 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  scroll-behavior: smooth;
+  
+}
+body {
+  line-height: 1.6;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* 導航欄 */
+.huanluncolor{
+  color: #2180d4;
+}
+nav {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+/* 導覽連結樣式 */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #2a73ff;
+  transform: scale(1.2);
+}
+
+/* 漢堡選單按鈕 */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  user-select: none;
+  color: #333;
+}
+
+/* checkbox 控制選單開關 */
+#menu-toggle {
+  display: none;
+}
+
+/* 小螢幕：響應式處理 */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: white;
+    width: 100%;
+    flex-direction: column;
+    display: none;
+    padding: 1rem 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  #menu-toggle:checked + .hamburger + .nav-links {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+}
+
+/* 頁首 */
+header {
+  text-align: center;
+  padding: 130px 120px;
+  /*background: linear-gradient(to right, #0a0b0b, #626465);*/
+  background-image: linear-gradient(to right, #a8caba 0%, #5d4157 100%);
+  color: white;
+  margin-top: 60px;
+}
+
+/* 新增這個容器來排列圖片與文字 */
+.profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid rgb(13, 247, 13); 
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for floating effect */
+}
+
+.profile-img:hover {
+  transform: translateY(-10px); 
+  box-shadow: 0px 8px 15px rgb(249, 249, 249); /
+}
+
+
+/* 名字與介紹區 */
+.name h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.name p {
+  font-size: 1.1rem;
+  color: #ccc;
+  text-align: left;
+}
+
+.text{
+  flex-direction: column;;
+}
+
+.slogn {
+  margin-top: 2rem;
+  font-size: 25px;
+  font-weight: inherit;
+  text-align: center;
+  color: #fff;
+}
+
+/* RWD 響應式調整 */
+@media (max-width: 768px) {
+  .profile-row {
+    flex-direction: column;
+  }
+
+  .profile-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .name h1 {
+    font-size: 1.5rem;
+  }
+
+  .name p {
+    font-size: 1rem;
+  }
+}
+
+
+/* 卡片樣式 */
+.card {
+  background: white;
+  border-radius: 12px;
+  scroll-margin-top: 80px;
+  
+  padding: 2rem;
+  margin: 2rem ;
+  /*max-width: 1000px;*/
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-15px);
+}
+
+/* 技能標籤及進度條（使用 CSS 偽元素與自訂屬性 --percent） */
+/* 整體佈局 */
+.skills-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.bars-container {
+  flex: 1 1 400px;
+  min-width: min(100%, 400px);
+}
+
+.circles-container {
+  flex: 1 1 400px;
+  min-width: min(100%, 400px);
+}
+
+/* 長條進度樣式 */
+.skill {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1.2rem;
+  background: rgba(241, 241, 241, 0.9);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.skill:hover {
+  transform: translateY(-3px);
+}
+
+.skill-label {
+  position: relative;
+  z-index: 2;
+  font-weight: 600;
+  color: #333;
+}
+
+.skill-percent {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  color: #2180d4;
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.skill-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--percent);
+  background: rgba(17, 137, 206, 0.2);
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skill:hover .skill-bar {
+  width: 0;
+}
+
+/* 圓形進度條樣式 */
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.skill2a {
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.progress-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  background: conic-gradient(#1189ce var(--angle), #f1f1f1 0);
+  --angle: 0deg;
+  animation: show-init 1s ease-out forwards;
+  margin: 1rem auto;
+  transition: transform 0.3s ease;
+}
+
+.progress-circle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(17, 137, 206, 0.4);
+  --angle: 0deg;
+}
+
+.progress-circle::before {
+  content: attr(data-progress);
+  position: absolute;
+  inset: 8px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: #2180d4;
+  font-weight: 700;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+
+@keyframes show-init {
+  from { --angle: 0deg; }
+  to {}
+}
+
+.p80 { --angle: 288deg; }
+.p65 { --angle: 234deg; }
+.p90 { --angle: 324deg; }
+.p75 { --angle: 270deg; }
+.p70 { --angle: 252deg; }
+
+
+
+
+/* 時間軸 */
+/* 共用外框：時間軸線條 */
+.item {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+  border-left: 3px solid #2180d4;
+  margin-bottom: 2rem;
+}
+
+/* 裡面的排版結構：左右兩側 */
+.item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap; /* 手機排版 */
+}
+
+/* 統一文字區塊 class */
+.text-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+ /* align-self: flex-start;  靠上對齊 */
+}
+
+/* 統一時間格式 */
+.date {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.3rem 0 0.8rem 0;
+  text-align: left;
+}
+
+.school-pic img,
+.timeline .item img{
+  width: 300px;
+  height: auto;
+  border-radius: 10%;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 滑鼠移入的放大動畫 */
+.school-pic img:hover,
+.timeline .item img:hover,
+.interest-card img:hover {
+  transform: scale(1.02);
+}
+.slider {
+  width: 300px;           
+  height: auto;          
+  overflow: hidden;
+  position: relative;
+}
+
+.slide-track {
+  display: flex;
+  width: calc(300px * 4);  /* 圖片寬度 x 張數 */
+  animation: slide 16s infinite;
+}
+
+.slide {
+  width: 300px;
+  height: 200px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.btn-link {
+  padding: 12px 24px;
+  background-color: #2180d4;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 102, 255, 0.3);
+}
+
+.btn-link:hover {
+  background-color: #004bcc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 102, 255, 0.4);
+}
+.text-block .button-group {
+  margin-top: 20px;
+  justify-content: flex-start;
+}
+
+/* 幻燈片動畫 */
+@keyframes slide {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-300px); }
+  50%  { transform: translateX(-600px); }
+  75%  { transform: translateX(-900px); }
+  100% { transform: translateX(0); }
+}
+
+.interest-cardst {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+  margin-top: 1rem;
+}
+
+.interest-card {
+  background: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-size: cover;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.interest-card:hover {
+  transform: translateY(-15px);
+}
+
+.interest-card img {
+  width: 400px;
+  height: 300px;
+  border-radius: 10%;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 滑鼠移入的放大動畫 */
+.school-pic img:hover,
+.timeline .item img:hover,
+.interest-card img:hover {
+  transform: scale(1.02);
+}
+
+
+/* 頁尾及聯絡資訊 */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #333;
+  color: white;
+}
+.contact-links {
+  margin-top: 1rem;
+}
+.contact-links a {
+  color: white;
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+.contact-links a:hover {
+  color: #2180d4;
+}
+/* 回到最上 */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #2180d4;
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s, transform 0.3s;
+  z-index: 999;
+}
+
+.back-to-top:hover {
+  background-color: #1f5be3;
+  transform: scale(1.05);
+}
+
+/* 讓整頁有足夠高度測試滾動 */
+section {
+  padding: 100vh 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* 響應式設計 */
+/* RWD 響應式設計 */
+@media (max-width: 992px) {
+  .skills-wrapper {
+    gap: 1rem;
+  }
+  header {
+    padding: 16rem 4rem 8rem;
+  }
+  .skill {
+    margin: 1rem 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 12rem 2rem 6rem;
+  }
+  .row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .progress-circle {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .progress-circle::before {
+    font-size: 1em;
+  }
+  
+  .skill-percent {
+    font-size: 1em;
+    right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10rem 1rem 4rem;
+  }
+  
+  .skill {
+    padding: 0.8rem;
+  }
+  
+  .skill-label {
+    font-size: 0.9em;
+  }
+  
+  .skill-percent {
+    font-size: 0.9em;
+  }
+  
+  .progress-circle {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .progress-circle::before {
+    inset: 6px;
+    font-size: 0.9em;
+  }
+}
+
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+  .card {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  header {
+    padding: 6rem 1rem 2rem;
+  }
+  .interest-slider {
+    height: 150px;
+  }
+}
+
+
+
+
+
+
